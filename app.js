@@ -9,7 +9,9 @@ app.use(express.json());
 
 // Middleware para permitir CORS
 app.use(cors({
-    origin: 'http://3.94.213.185:8080' // Permitir este origen
+    origin: 'http://52.1.149.100:8080', // Permitir todas las solicitudes
+    methods: 'GET, POST, OPTIONS',
+    allowedHeaders: 'Content-Type'
 }));
 
 // Ruta para la raíz
@@ -35,7 +37,6 @@ app.post('/registro', async (req, res) => {
     if (!nombres || !apellidos || !fecha_nacimiento || !password) {
         return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
     }
-
     try {
         // Encriptar la contraseña
         const hashedPassword = await bcrypt.hash(password, 10);
